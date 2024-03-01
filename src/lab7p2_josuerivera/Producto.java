@@ -80,5 +80,5 @@ public class Producto {
     public String toString() {
         return "Producto{" + "id=" + id + ", name=" + name + ", category=" + category + ", price=" + price + ", aisle=" + aisle + ", bin=" + bin + '}';
     }
-    
+    //Hola
 }
