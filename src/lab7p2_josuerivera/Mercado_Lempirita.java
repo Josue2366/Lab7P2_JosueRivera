@@ -4,6 +4,15 @@
  */
 package lab7p2_josuerivera;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.util.Scanner;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
+
 /**
  *
  * @author josue
@@ -38,7 +47,7 @@ public class Mercado_Lempirita extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTree1 = new javax.swing.JTree();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        Jtable_producto = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
@@ -66,20 +75,28 @@ public class Mercado_Lempirita extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jToggleButton1.setText("Enter");
+        jToggleButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jToggleButton1MouseClicked(evt);
+            }
+        });
 
         javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("CSVs");
         jTree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
         jScrollPane1.setViewportView(jTree1);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        Jtable_producto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
                 "Id", "Nombre", "Category", "Price", "Aisle", "Bin"
             }
         ));
-        jScrollPane2.setViewportView(jTable1);
+        jScrollPane2.setViewportView(Jtable_producto);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -175,6 +192,26 @@ public class Mercado_Lempirita extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem10ActionPerformed
 
+    private void jToggleButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jToggleButton1MouseClicked
+        // TODO add your handling code here:
+        String com = "";
+        if (Jt_Comandos.getText().contains("./load ")){
+            load();
+        }
+        else if (Jt_Comandos.getText().contains("./create ")){
+            create();
+        }
+        else if (Jt_Comandos.getText().contains("./clear")){
+            
+        }
+        else if (Jt_Comandos.getText().contains("./refresh")){
+            
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Commando Incorrecto");
+        }
+    }//GEN-LAST:event_jToggleButton1MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -209,9 +246,89 @@ public class Mercado_Lempirita extends javax.swing.JFrame {
             }
         });
     }
+    public void load(){
+        String com = "";
+        Scanner sc = new Scanner(Jt_Comandos.getText());
+            sc.useDelimiter(" ");
+            while (sc.hasNext()){
+                sc.next();
+                com = sc.next();
+            }
+            Admin_Product p = new Admin_Product(com);
+            if (p.getArchivo().exists()){
+                p.cargarArchivo();
+            DefaultTableModel modelo =(DefaultTableModel) Jtable_producto.getModel();
+            modelo.setRowCount(0);
+                for (int i = 0; i < p.getLista().size(); i++) {
+                    Object [] products = {
+                        p.getLista().get(i).getId(),
+                        p.getLista().get(i).getName(),
+                        p.getLista().get(i).getCategory(),
+                        p.getLista().get(i).getPrice(),
+                        p.getLista().get(i).getAisle(),
+                        p.getLista().get(i).getBin()};
+                    modelo.addRow(products);
+                }
+                
+            }
+            else{
+               JOptionPane.showMessageDialog(this, "el Archivo no existe");
+            }
+            
+    }
+    public void create(){
+        int cont = 0;
+        DefaultTreeModel modelo = 
+                (DefaultTreeModel) jTree1.getModel();
+        DefaultTableModel modell =
+                (DefaultTableModel) Jtable_producto.getModel();
+        DefaultMutableTreeNode raiz = (DefaultMutableTreeNode)modelo.getRoot();
+        String com = "";
+        Scanner sc = new Scanner(Jt_Comandos.getText());
+        sc.useDelimiter(" ");
+        while(sc.hasNext()){
+            sc.next();
+            com = sc.next();
+        }
+        for (int i = 0; i < modell.getRowCount(); i++) {
+            if (modell.getValueAt(i, 0).toString().matches("^[0-9]$")){
+            }
+            else {
+                cont =1;
+                break;
+            }
+            if (modell.getValueAt(i, 2).toString().matches("^[0-9]$")){
+            }
+            else{
+                cont =1;
+                break;
+            }
+            if (modell.getValueAt(i, 3).toString().matches("^[0-9]$")){
+            }
+            else{
+                cont = 1;
+                break;
+            }
+            if (modell.getValueAt(i, 4))
+            
+            
+        }
+        File archivo = null;
+        FileWriter fw = null;
+        BufferedWriter bw = null;
+        try {
+            archivo = new File(com);
+            fw = new FileWriter("./"+archivo,false);
+            bw = new BufferedWriter (fw);
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField Jt_Comandos;
+    private javax.swing.JTable Jtable_producto;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -233,7 +350,6 @@ public class Mercado_Lempirita extends javax.swing.JFrame {
     private javax.swing.JPopupMenu jPopupMenu2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JTree jTree1;
     // End of variables declaration//GEN-END:variables

@@ -51,12 +51,12 @@ public class Admin_Product {
             fw = new FileWriter(Archivo, false);
             bw = new BufferedWriter(fw);
             for (Producto t : lista) {
-                bw.write(t.getId() + ";");
-                bw.write(t.getName() + ";");
-                bw.write(t.getCategory()+ ";");
-                bw.write(t.getPrice()+";");
-                bw.write(t.getAisle()+";");
-                bw.write(t.getBin()+";");
+                bw.write(t.getId() + ",");
+                bw.write(t.getName() + ",");
+                bw.write(t.getCategory()+ ",");
+                bw.write(t.getPrice()+",");
+                bw.write(t.getAisle()+",");
+                bw.write(t.getBin()+",");
             }
             bw.flush();
         } catch (Exception ex) {
@@ -71,7 +71,7 @@ public class Admin_Product {
         if (Archivo.exists()) {
             try {
                 sc = new Scanner(Archivo);
-                sc.useDelimiter(";");
+                sc.useDelimiter(",");
                 while (sc.hasNext()) {
                     lista.add(new Producto(sc.nextInt(),sc.next(),sc.nextInt()
                             ,sc.nextDouble(),sc.nextInt(),sc.nextInt()));
