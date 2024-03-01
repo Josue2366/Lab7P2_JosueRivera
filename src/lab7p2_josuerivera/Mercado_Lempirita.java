@@ -7,7 +7,10 @@ package lab7p2_josuerivera;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -199,7 +202,11 @@ public class Mercado_Lempirita extends javax.swing.JFrame {
             load();
         }
         else if (Jt_Comandos.getText().contains("./create ")){
-            create();
+            try {
+                create();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
         }
         else if (Jt_Comandos.getText().contains("./clear")){
             
@@ -276,7 +283,7 @@ public class Mercado_Lempirita extends javax.swing.JFrame {
             }
             
     }
-    public void create(){
+    public void create() throws IOException{
         int cont = 0;
         DefaultTreeModel modelo = 
                 (DefaultTreeModel) jTree1.getModel();
@@ -294,35 +301,66 @@ public class Mercado_Lempirita extends javax.swing.JFrame {
             if (modell.getValueAt(i, 0).toString().matches("^[0-9]$")){
             }
             else {
+                JOptionPane.showMessageDialog(this, "Error al poner el dato de la ID "+"de la row"+i);
                 cont =1;
                 break;
             }
             if (modell.getValueAt(i, 2).toString().matches("^[0-9]$")){
             }
             else{
+                JOptionPane.showMessageDialog(this, "Error al poner el dato de la categoria "+"de la row"+i);
                 cont =1;
                 break;
             }
             if (modell.getValueAt(i, 3).toString().matches("^[0-9]$")){
             }
             else{
+                JOptionPane.showMessageDialog(this, "Error al poner el dato del precio "+"de la row"+i);
                 cont = 1;
                 break;
             }
-            if (modell.getValueAt(i, 4))
-            
-            
+            if (modell.getValueAt(i, 4).toString().matches("^[0-9]{3}$")){
+            }
+            else{
+                JOptionPane.showMessageDialog(this, "Error al poner el dato de la aisle "+"de la row"+i);
+                cont = 1;
+                break;
+            }
+            if (modell.getValueAt(i, 5).toString().matches("^[0-9]{3}$")){
+            }
+            else{
+                JOptionPane.showMessageDialog(this, "Error al poner el dato del bin "+"de la row"+i);
+                cont = 1;
+                break;
+            }
         }
-        File archivo = null;
-        FileWriter fw = null;
-        BufferedWriter bw = null;
-        try {
-            archivo = new File(com);
-            fw = new FileWriter("./"+archivo,false);
-            bw = new BufferedWriter (fw);
+        
+        if (cont == 0){
+            File archivo = null;
+            FileWriter fw = null;
+            BufferedWriter bw = null;
+            try {
+                archivo = new File(com);
+                fw = new FileWriter("./"+archivo,false);
+                bw = new BufferedWriter (fw);
+                for (int i = 0; i < modell.getRowCount(); i++) {
+                    bw.write(modell.getValueAt(i, 0)+",");
+                    bw.write(modell.getValueAt(i, 1)+",");
+                    bw.write(modell.getValueAt(i, 2)+",");
+                    bw.write(modell.getValueAt(i, 3)+",");
+                    bw.write(modell.getValueAt(i, 4)+",");
+                    bw.write(modell.getValueAt(i, 5)+",");
+                    
+                }
+                bw.flush();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            bw.close();
+            fw.close();
+        }
+        else{
             
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 
