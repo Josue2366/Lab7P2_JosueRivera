@@ -209,7 +209,10 @@ public class Mercado_Lempirita extends javax.swing.JFrame {
             }
         }
         else if (Jt_Comandos.getText().contains("./clear")){
-            
+            DefaultTableModel modell =
+                (DefaultTableModel) Jtable_producto.getModel();
+            modell.setRowCount(0);
+            modell.setRowCount(4);
         }
         else if (Jt_Comandos.getText().contains("./refresh")){
             
@@ -284,7 +287,7 @@ public class Mercado_Lempirita extends javax.swing.JFrame {
             
     }
     public void create() throws IOException{
-        int cont = 0;
+        
         DefaultTreeModel modelo = 
                 (DefaultTreeModel) jTree1.getModel();
         DefaultTableModel modell =
@@ -297,60 +300,76 @@ public class Mercado_Lempirita extends javax.swing.JFrame {
             sc.next();
             com = sc.next();
         }
+        /*
         for (int i = 0; i < modell.getRowCount(); i++) {
-            if (modell.getValueAt(i, 0).toString().matches("^[0-9]$")){
-            }
-            else {
-                JOptionPane.showMessageDialog(this, "Error al poner el dato de la ID "+"de la row"+i);
-                cont =1;
-                break;
-            }
-            if (modell.getValueAt(i, 2).toString().matches("^[0-9]$")){
-            }
-            else{
-                JOptionPane.showMessageDialog(this, "Error al poner el dato de la categoria "+"de la row"+i);
-                cont =1;
-                break;
-            }
-            if (modell.getValueAt(i, 3).toString().matches("^[0-9]$")){
-            }
-            else{
-                JOptionPane.showMessageDialog(this, "Error al poner el dato del precio "+"de la row"+i);
+            if (modell.getValueAt(i, 0) == null){
                 cont = 1;
-                break;
-            }
-            if (modell.getValueAt(i, 4).toString().matches("^[0-9]{3}$")){
+                JOptionPane.showMessageDialog(this, "Error al poner el dato de la ID "+"de la row "+i);
             }
             else{
-                JOptionPane.showMessageDialog(this, "Error al poner el dato de la aisle "+"de la row"+i);
-                cont = 1;
-                break;
-            }
-            if (modell.getValueAt(i, 5).toString().matches("^[0-9]{3}$")){
-            }
-            else{
-                JOptionPane.showMessageDialog(this, "Error al poner el dato del bin "+"de la row"+i);
-                cont = 1;
-                break;
-            }
-        }
+                if (modell.getValueAt(i, 0).toString().matches("^[0-9]$")){
+                }
+                else {
+                    JOptionPane.showMessageDialog(this, "Error al poner el dato de la ID "+"de la row "+i);
+                    cont =1;
+                    break;
+                }
+                if (modell.getValueAt(i, 2).toString().matches("^[0-9]$")){
+                }
+                else{
+                    JOptionPane.showMessageDialog(this, "Error al poner el dato de la categoria "+"de la row "+i);
+                    cont =1;
+                    break;
+                }
+                if (modell.getValueAt(i, 3).toString().matches("^[0-9]$")){
+                }
+                else{
+                    JOptionPane.showMessageDialog(this, "Error al poner el dato del precio "+"de la row "+i);
+                    cont = 1;
+                    break;
+                }
+                if (modell.getValueAt(i, 4).toString().matches("^[0-9]{3}$")){
+                }
+                else{
+                    JOptionPane.showMessageDialog(this, "Error al poner el dato de la aisle "+"de la row "+i);
+                    cont = 1;
+                    break;
+                }
+                if (modell.getValueAt(i, 5).toString().matches("^[0-9]{3}$")){
+                }
+                else{
+                    JOptionPane.showMessageDialog(this, "Error al poner el dato del bin "+"de la row "+i);
+                    cont = 1;
+                    break;
+                }
+            }    
+        }*/
         
-        if (cont == 0){
+       
             File archivo = null;
             FileWriter fw = null;
             BufferedWriter bw = null;
             try {
                 archivo = new File(com);
-                fw = new FileWriter("./"+archivo,false);
+                fw = new FileWriter("./archivo/"+archivo,false);
                 bw = new BufferedWriter (fw);
                 for (int i = 0; i < modell.getRowCount(); i++) {
-                    bw.write(modell.getValueAt(i, 0)+",");
-                    bw.write(modell.getValueAt(i, 1)+",");
-                    bw.write(modell.getValueAt(i, 2)+",");
-                    bw.write(modell.getValueAt(i, 3)+",");
-                    bw.write(modell.getValueAt(i, 4)+",");
-                    bw.write(modell.getValueAt(i, 5)+",");
-                    
+                    if ((modell.getValueAt(i, 0) == null) ||
+                            (modell.getValueAt(i, 1) == null)||
+                            (modell.getValueAt(i, 2) == null)||
+                            (modell.getValueAt(i, 3) == null)||
+                            (modell.getValueAt(i, 4) == null)||
+                            (modell.getValueAt(i, 5) == null)){
+                        continue;
+                    }
+                    else{
+                        bw.write(modell.getValueAt(i, 0)+",");
+                        bw.write(modell.getValueAt(i, 1)+",");
+                        bw.write(modell.getValueAt(i, 2)+",");
+                        bw.write(modell.getValueAt(i, 3)+",");
+                        bw.write(modell.getValueAt(i, 4)+",");
+                        bw.write(modell.getValueAt(i, 5)+",");
+                    }
                 }
                 bw.flush();
             } catch (Exception e) {
@@ -358,10 +377,9 @@ public class Mercado_Lempirita extends javax.swing.JFrame {
             }
             bw.close();
             fw.close();
-        }
-        else{
-            
-        }
+        
+        modell.setRowCount(0);
+        modell.setRowCount(4);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

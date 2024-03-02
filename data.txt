@@ -1,0 +1,1 @@
+1,Smartphone,8,599.99,401,011,2,Tablet,8,349.99,402,012,3,Laptop,8,899.99,403,013,4,Smartwatch,8,199.99,404,014,5,Wireless Earbuds,8,129.99,405,015,6,Bluetooth Speaker,8,79.99,406,016,7,Gaming Console,8,499.99,407,017,8,Virtual Reality Headset,8,299.99,408,018,9,4K TV,8,999.99,409,019,10,Home Theater System,8,699.99,410,020
