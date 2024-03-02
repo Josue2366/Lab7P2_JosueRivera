@@ -524,9 +524,11 @@ public class Mercado_Lempirita extends javax.swing.JFrame {
         }
     }
     public void refresh(){
+         
         DefaultTreeModel modelo = 
                     (DefaultTreeModel) jTree1.getModel();
         DefaultMutableTreeNode raiz = (DefaultMutableTreeNode)modelo.getRoot();
+        raiz.removeAllChildren();
         File archivo = new File("./archivo/");
         listar_archivos(archivo,raiz);
         modelo.reload();
