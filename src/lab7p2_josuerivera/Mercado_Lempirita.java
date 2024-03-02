@@ -40,8 +40,8 @@ public class Mercado_Lempirita extends javax.swing.JFrame {
 
         jMenu3 = new javax.swing.JMenu();
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jPopupMenu2 = new javax.swing.JPopupMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
@@ -66,14 +66,30 @@ public class Mercado_Lempirita extends javax.swing.JFrame {
 
         jMenu3.setText("jMenu3");
 
-        jMenuItem1.setText("jMenuItem1");
-        jPopupMenu1.add(jMenuItem1);
-
-        jMenuItem2.setText("jMenuItem2");
+        jMenuItem2.setText("load file");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         jPopupMenu1.add(jMenuItem2);
 
-        jMenuItem3.setText("jMenuItem3");
+        jMenuItem1.setText("refresh trees");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(jMenuItem1);
+
+        jMenuItem3.setText("Limpiar tabla");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         jPopupMenu2.add(jMenuItem3);
+        jMenuItem3.getAccessibleContext().setAccessibleName("Limpiar tabla");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -99,6 +115,11 @@ public class Mercado_Lempirita extends javax.swing.JFrame {
                 "Id", "Nombre", "Category", "Price", "Aisle", "Bin"
             }
         ));
+        Jtable_producto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Jtable_productoMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(Jtable_producto);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -136,9 +157,19 @@ public class Mercado_Lempirita extends javax.swing.JFrame {
         jMenu1.setText("File");
 
         jMenuItem4.setText("New File");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem4);
 
         jMenuItem5.setText("Import File");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem5);
 
         jMenuBar1.add(jMenu1);
@@ -148,14 +179,29 @@ public class Mercado_Lempirita extends javax.swing.JFrame {
         jMenu5.setText("Clear");
 
         jMenuItem7.setText("Clear Command Line");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
         jMenu5.add(jMenuItem7);
 
         jMenuItem8.setText("Clear Table");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
         jMenu5.add(jMenuItem8);
 
         jMenu2.add(jMenu5);
 
         jMenuItem6.setText("Refresh Tree");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem6);
 
         jMenuBar1.add(jMenu2);
@@ -163,6 +209,11 @@ public class Mercado_Lempirita extends javax.swing.JFrame {
         jMenu4.setText("Help");
 
         jMenuItem9.setText("Product Structure");
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
         jMenu4.add(jMenuItem9);
 
         jMenuItem10.setText("Commands");
@@ -193,6 +244,8 @@ public class Mercado_Lempirita extends javax.swing.JFrame {
 
     private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
         // TODO add your handling code here:
+        JOptionPane.showMessageDialog(this, "lista de Comandos:\n"+" ./load data.txt(carga la tabla)\n"+
+                "./create archivo.txt -single(crear archivo)\n"+"./clear(limpiar tabla)\n"+"./refresh(mostrar archivos creados)");
     }//GEN-LAST:event_jMenuItem10ActionPerformed
 
     private void jToggleButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jToggleButton1MouseClicked
@@ -222,6 +275,73 @@ public class Mercado_Lempirita extends javax.swing.JFrame {
         }
         Jt_Comandos.setText("");
     }//GEN-LAST:event_jToggleButton1MouseClicked
+
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(this, " id: es el numero identificador del objeto\n" +
+" name: nombre del producto listado\n" +
+" category: es el numero de categoria que tiene\n" +
+" price: el valor del producto\n"+
+" aisle: numero de pasillo donde se encuentra el producto\n"+
+" bin: es la repisa del producto\n");
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
+
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel modell =
+                (DefaultTableModel) Jtable_producto.getModel();
+            modell.setRowCount(0);
+            modell.setRowCount(4);
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
+
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+        // TODO add your handling code here:
+        Jt_Comandos.setText("");
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        // TODO add your handling code here:
+        refresh();
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        // TODO add your handling code here:
+        load();
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        try {
+            // TODO add your handling code here:
+            create();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel modell =
+                (DefaultTableModel) Jtable_producto.getModel();
+            modell.setRowCount(0);
+            modell.setRowCount(4);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void Jtable_productoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Jtable_productoMouseClicked
+        // TODO add your handling code here:
+        if(evt.isMetaDown()){
+            jPopupMenu2.show(evt.getComponent(), evt.getX(), evt.getY());
+        }
+    }//GEN-LAST:event_Jtable_productoMouseClicked
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        refresh();
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+        load();
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -258,129 +378,138 @@ public class Mercado_Lempirita extends javax.swing.JFrame {
         });
     }
     public void load(){
-        String com = "";
-        Scanner sc = new Scanner(Jt_Comandos.getText());
-            sc.useDelimiter(" ");
-            while (sc.hasNext()){
-                sc.next();
-                com = sc.next();
-            }
-            Admin_Product p = new Admin_Product(com);
-            if (p.getArchivo().exists()){
-                p.cargarArchivo();
-            DefaultTableModel modelo =(DefaultTableModel) Jtable_producto.getModel();
-            modelo.setRowCount(0);
-                for (int i = 0; i < p.getLista().size(); i++) {
-                    Object [] products = {
-                        p.getLista().get(i).getId(),
-                        p.getLista().get(i).getName(),
-                        p.getLista().get(i).getCategory(),
-                        p.getLista().get(i).getPrice(),
-                        p.getLista().get(i).getAisle(),
-                        p.getLista().get(i).getBin()};
-                    modelo.addRow(products);
+        if (Jt_Comandos.getText().contains("./load ")){
+            String com = "";
+            Scanner sc = new Scanner(Jt_Comandos.getText());
+                sc.useDelimiter(" ");
+                while (sc.hasNext()){
+                    sc.next();
+                    com = sc.next();
                 }
-                
-            }
-            else{
-               JOptionPane.showMessageDialog(this, "el Archivo no existe");
-            }
+                Admin_Product p = new Admin_Product(com);
+                if (p.getArchivo().exists()){
+                    p.cargarArchivo();
+                DefaultTableModel modelo =(DefaultTableModel) Jtable_producto.getModel();
+                modelo.setRowCount(0);
+                    for (int i = 0; i < p.getLista().size(); i++) {
+                        Object [] products = {
+                            p.getLista().get(i).getId(),
+                            p.getLista().get(i).getName(),
+                            p.getLista().get(i).getCategory(),
+                            p.getLista().get(i).getPrice(),
+                            p.getLista().get(i).getAisle(),
+                            p.getLista().get(i).getBin()};
+                        modelo.addRow(products);
+                    }
+
+                }
+                else{
+                   JOptionPane.showMessageDialog(this, "el Archivo no existe");
+                }
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Commando Incorrecto");
+        }
             
     }
     public void create() throws IOException{
-        
-        DefaultTreeModel modelo = 
-                (DefaultTreeModel) jTree1.getModel();
-        DefaultTableModel modell =
-                (DefaultTableModel) Jtable_producto.getModel();
-        DefaultMutableTreeNode raiz = (DefaultMutableTreeNode)modelo.getRoot();
-        String com = "";
-        Scanner sc = new Scanner(Jt_Comandos.getText());
-        sc.useDelimiter(" ");
-        while(sc.hasNext()){
-            sc.next();
-            com = sc.next();
-        }
-        /*
-        for (int i = 0; i < modell.getRowCount(); i++) {
-            if (modell.getValueAt(i, 0) == null){
-                cont = 1;
-                JOptionPane.showMessageDialog(this, "Error al poner el dato de la ID "+"de la row "+i);
+        if (Jt_Comandos.getText().contains("./create ")){
+            DefaultTreeModel modelo = 
+                    (DefaultTreeModel) jTree1.getModel();
+            DefaultTableModel modell =
+                    (DefaultTableModel) Jtable_producto.getModel();
+            DefaultMutableTreeNode raiz = (DefaultMutableTreeNode)modelo.getRoot();
+            String com = "";
+            Scanner sc = new Scanner(Jt_Comandos.getText());
+            sc.useDelimiter(" ");
+            while(sc.hasNext()){
+                sc.next();
+                com = sc.next();
             }
-            else{
-                if (modell.getValueAt(i, 0).toString().matches("^[0-9]$")){
-                }
-                else {
+            /*
+            for (int i = 0; i < modell.getRowCount(); i++) {
+                if (modell.getValueAt(i, 0) == null){
+                    cont = 1;
                     JOptionPane.showMessageDialog(this, "Error al poner el dato de la ID "+"de la row "+i);
-                    cont =1;
-                    break;
-                }
-                if (modell.getValueAt(i, 2).toString().matches("^[0-9]$")){
                 }
                 else{
-                    JOptionPane.showMessageDialog(this, "Error al poner el dato de la categoria "+"de la row "+i);
-                    cont =1;
-                    break;
-                }
-                if (modell.getValueAt(i, 3).toString().matches("^[0-9]$")){
-                }
-                else{
-                    JOptionPane.showMessageDialog(this, "Error al poner el dato del precio "+"de la row "+i);
-                    cont = 1;
-                    break;
-                }
-                if (modell.getValueAt(i, 4).toString().matches("^[0-9]{3}$")){
-                }
-                else{
-                    JOptionPane.showMessageDialog(this, "Error al poner el dato de la aisle "+"de la row "+i);
-                    cont = 1;
-                    break;
-                }
-                if (modell.getValueAt(i, 5).toString().matches("^[0-9]{3}$")){
-                }
-                else{
-                    JOptionPane.showMessageDialog(this, "Error al poner el dato del bin "+"de la row "+i);
-                    cont = 1;
-                    break;
-                }
-            }    
-        }*/
-        
-       
-            File archivo = null;
-            FileWriter fw = null;
-            BufferedWriter bw = null;
-            try {
-                archivo = new File(com);
-                fw = new FileWriter("./archivo/"+archivo,false);
-                bw = new BufferedWriter (fw);
-                for (int i = 0; i < modell.getRowCount(); i++) {
-                    if ((modell.getValueAt(i, 0) == null) ||
-                            (modell.getValueAt(i, 1) == null)||
-                            (modell.getValueAt(i, 2) == null)||
-                            (modell.getValueAt(i, 3) == null)||
-                            (modell.getValueAt(i, 4) == null)||
-                            (modell.getValueAt(i, 5) == null)){
-                        continue;
+                    if (modell.getValueAt(i, 0).toString().matches("^[0-9]$")){
+                    }
+                    else {
+                        JOptionPane.showMessageDialog(this, "Error al poner el dato de la ID "+"de la row "+i);
+                        cont =1;
+                        break;
+                    }
+                    if (modell.getValueAt(i, 2).toString().matches("^[0-9]$")){
                     }
                     else{
-                        bw.write(modell.getValueAt(i, 0)+",");
-                        bw.write(modell.getValueAt(i, 1)+",");
-                        bw.write(modell.getValueAt(i, 2)+",");
-                        bw.write(modell.getValueAt(i, 3)+",");
-                        bw.write(modell.getValueAt(i, 4)+",");
-                        bw.write(modell.getValueAt(i, 5)+",");
+                        JOptionPane.showMessageDialog(this, "Error al poner el dato de la categoria "+"de la row "+i);
+                        cont =1;
+                        break;
                     }
+                    if (modell.getValueAt(i, 3).toString().matches("^[0-9]$")){
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(this, "Error al poner el dato del precio "+"de la row "+i);
+                        cont = 1;
+                        break;
+                    }
+                    if (modell.getValueAt(i, 4).toString().matches("^[0-9]{3}$")){
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(this, "Error al poner el dato de la aisle "+"de la row "+i);
+                        cont = 1;
+                        break;
+                    }
+                    if (modell.getValueAt(i, 5).toString().matches("^[0-9]{3}$")){
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(this, "Error al poner el dato del bin "+"de la row "+i);
+                        cont = 1;
+                        break;
+                    }
+                }    
+            }*/
+
+
+                File archivo = null;
+                FileWriter fw = null;
+                BufferedWriter bw = null;
+                try {
+                    archivo = new File(com);
+                    fw = new FileWriter("./archivo/"+archivo,false);
+                    bw = new BufferedWriter (fw);
+                    for (int i = 0; i < modell.getRowCount(); i++) {
+                        if ((modell.getValueAt(i, 0) == null) ||
+                                (modell.getValueAt(i, 1) == null)||
+                                (modell.getValueAt(i, 2) == null)||
+                                (modell.getValueAt(i, 3) == null)||
+                                (modell.getValueAt(i, 4) == null)||
+                                (modell.getValueAt(i, 5) == null)){
+                            continue;
+                        }
+                        else{
+                            bw.write(modell.getValueAt(i, 0)+",");
+                            bw.write(modell.getValueAt(i, 1)+",");
+                            bw.write(modell.getValueAt(i, 2)+",");
+                            bw.write(modell.getValueAt(i, 3)+",");
+                            bw.write(modell.getValueAt(i, 4)+",");
+                            bw.write(modell.getValueAt(i, 5)+",");
+                        }
+                    }
+                    bw.flush();
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-                bw.flush();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            bw.close();
-            fw.close();
-        
-        modell.setRowCount(0);
-        modell.setRowCount(4);
+                bw.close();
+                fw.close();
+
+            modell.setRowCount(0);
+            modell.setRowCount(4);
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Commando Incorrecto");
+        }
     }
     public void refresh(){
         
