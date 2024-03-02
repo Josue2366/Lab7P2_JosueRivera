@@ -512,7 +512,22 @@ public class Mercado_Lempirita extends javax.swing.JFrame {
         }
     }
     public void refresh(){
-        
+        DefaultTreeModel modelo = 
+                    (DefaultTreeModel) jTree1.getModel();
+        DefaultMutableTreeNode raiz = (DefaultMutableTreeNode)modelo.getRoot();
+        File archivo = new File("./archivo/");
+        listar_archivos(archivo,raiz);
+        modelo.reload();
+        jTree1.setModel(modelo);
+    }
+    public void listar_archivos(File x, DefaultMutableTreeNode r){
+        try {
+            for (File f : x.listFiles()) {
+                DefaultMutableTreeNode pp = new DefaultMutableTreeNode (f.getName());
+                r.add(pp);
+            }
+        } catch (Exception e) {
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
