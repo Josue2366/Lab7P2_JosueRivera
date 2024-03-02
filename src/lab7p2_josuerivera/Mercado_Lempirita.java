@@ -102,6 +102,11 @@ public class Mercado_Lempirita extends javax.swing.JFrame {
 
         javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("CSVs");
         jTree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        jTree1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTree1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTree1);
 
         Jtable_producto.setModel(new javax.swing.table.DefaultTableModel(
@@ -342,6 +347,13 @@ public class Mercado_Lempirita extends javax.swing.JFrame {
         // TODO add your handling code here:
         load();
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jTree1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTree1MouseClicked
+        // TODO add your handling code here:
+        if (evt.isMetaDown()){
+            jPopupMenu1.show(evt.getComponent(), evt.getX(), evt.getY());
+        }
+    }//GEN-LAST:event_jTree1MouseClicked
 
     /**
      * @param args the command line arguments
