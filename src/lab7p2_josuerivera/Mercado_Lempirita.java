@@ -215,11 +215,12 @@ public class Mercado_Lempirita extends javax.swing.JFrame {
             modell.setRowCount(4);
         }
         else if (Jt_Comandos.getText().contains("./refresh")){
-            
+            refresh();
         }
         else{
             JOptionPane.showMessageDialog(this, "Commando Incorrecto");
         }
+        Jt_Comandos.setText("");
     }//GEN-LAST:event_jToggleButton1MouseClicked
 
     /**
@@ -380,6 +381,9 @@ public class Mercado_Lempirita extends javax.swing.JFrame {
         
         modell.setRowCount(0);
         modell.setRowCount(4);
+    }
+    public void refresh(){
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
